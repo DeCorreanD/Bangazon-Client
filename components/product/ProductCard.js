@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
 import React from 'react';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { Button, Card } from 'react-bootstrap';
 import { deleteProduct } from '../../utils/data/productData';
 
@@ -13,14 +13,14 @@ const ProductCard = ({
   price,
   image,
 }) => {
-  const deleteThisPost = () => {
+  const deleteThisProduct = () => {
     if (window.confirm('Delete Product?')) {
       deleteProduct(id).then(() => {
         ('Product Deleted');
       });
     }
   };
-  // const router = useRouter();
+  const router = useRouter();
 
   return (
     <>
@@ -32,7 +32,14 @@ const ProductCard = ({
           <Card.Title>Price: ${price}</Card.Title>
         </Card.Body>
         <Card.Footer className="text-muted">Quantity: {quantity}</Card.Footer>
-        <Button onClick={deleteThisPost}> Delete Product</Button>
+        <Button
+          onClick={() => {
+            router.push(`/post/edit/${id}`);
+          }}
+        >
+          Edit Post
+        </Button>
+        <Button onClick={deleteThisProduct}> Delete Product</Button>
       </Card>
     </>
   );

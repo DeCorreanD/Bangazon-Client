@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
@@ -30,6 +30,14 @@ function Home() {
       >
         <h1>Time To Buy Products {user.fbUser.displayName}! </h1>
         <p>Below are the available items, have fun!</p>
+
+        <Button
+          onClick={() => {
+            router.push('/post/new');
+          }}
+        >
+          Register New Product
+        </Button>
         <div className="d-flex flex-wrap">
           {products.map((product) => (
             <section key={`product--${product.id}`} className="post">
@@ -37,9 +45,6 @@ function Home() {
             </section>
           ))}
         </div>
-        <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-          Sign Out
-        </Button>
       </div>
     </>
   );
