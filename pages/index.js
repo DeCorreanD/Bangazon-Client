@@ -1,7 +1,6 @@
 import { Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { getProduct } from '../utils/data/productData';
 import ProductCard from '../components/product/ProductCard';
