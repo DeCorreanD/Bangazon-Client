@@ -27,7 +27,7 @@ const ProductForm = ({ obj }) => {
         quantity: obj.quantity,
         price: obj.price,
         image: obj.image,
-        sellerid: user.uid,
+        sellerId: user.id,
       });
     }
   }, [obj, user]);
@@ -57,7 +57,7 @@ const ProductForm = ({ obj }) => {
         quantity: currentProduct.quantity,
         price: currentProduct.price,
         image: currentProduct.image,
-        sellerid: user.uid,
+        sellerId: user.id,
       };
 
       updateProduct(productUpdate).then(() => router.push('/'));
@@ -68,7 +68,7 @@ const ProductForm = ({ obj }) => {
         quantity: currentProduct.quantity,
         price: currentProduct.price,
         image: currentProduct.image,
-        sellerid: user.uid,
+        sellerId: user.id,
       };
 
       createProduct(products).then(() => router.push('/product'));
