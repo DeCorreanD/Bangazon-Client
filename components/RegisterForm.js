@@ -56,13 +56,13 @@ function RegisterForm({ user, updateUser }) {
         <Form.Label>User Profile</Form.Label>
 
         {/* Bio Input */}
-        <Form.Control as="textarea" name="bio" required placeholder="Enter your Bio" onChange={handleInputChange} />
+        <Form.Control as="textarea" name="bio" required placeholder="Enter your Bio" value={formData.bio} onChange={handleInputChange} />
         <Form.Text className="text-muted">Let other users know a little bit about you...</Form.Text>
         {/* Name Input */}
-        <Form.Control as="textarea" name="name" required placeholder="Enter your Name" onChange={handleInputChange} />
+        <Form.Control as="textarea" name="name" required placeholder="Enter your Name" value={formData.name} onChange={handleInputChange} />
         <Form.Text className="text-muted">Let other users know your name...</Form.Text>
         {/* Image Input */}
-        <Form.Control as="textarea" type="url" name="image" required placeholder="Enter Image Url" onChange={handleInputChange} />
+        <Form.Control as="textarea" type="url" name="image" required placeholder="Enter Image Url" value={formData.image} onChange={handleInputChange} />
         <Form.Text className="text-muted">Let other users see you...</Form.Text>
 
         {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}

@@ -33,6 +33,14 @@ const ProductCard = ({
         </Card.Body>
         <Card.Footer className="text-muted">Quantity: {quantity}</Card.Footer>
         <Button
+          className="product-card-button"
+          onClick={() => {
+            router.push(`/post/${id}`);
+          }}
+        >
+          Product Details
+        </Button>
+        <Button
           onClick={() => {
             router.push(`/post/edit/${id}`);
           }}
