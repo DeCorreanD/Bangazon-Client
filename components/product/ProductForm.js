@@ -71,7 +71,7 @@ const ProductForm = ({ obj }) => {
         sellerId: user.id,
       };
 
-      createProduct(products).then(() => router.push('/product'));
+      createProduct(products).then(() => router.push('/'));
     }
   };
 
