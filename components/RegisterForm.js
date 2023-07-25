@@ -1,21 +1,53 @@
+/* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { registerUser } from '../utils/auth'; // Update with path to registerUser
+import { useRouter } from 'next/router';
+import { registerUser } from '../utils/auth';
+import { updateUserProfile } from '../utils/data/userData'; // Update with path to registerUser
 
 function RegisterForm({ user, updateUser }) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     bio: '',
     name: '',
     image: '',
     isseller: false,
-    uid: user.uid,
+    uid: '',
   });
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        id: user.id,
+        name: user.name || '',
+        image: user.image || '',
+        bio: user.bio || '',
+        uid: user.uid || '',
+      }));
+    }
+  }, [user]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser(formData).then(() => updateUser(user.uid));
+
+    if (user.id) {
+      updateUserProfile(formData)
+        .then(() => updateUser(user.uid))
+        .then(() => router.push('/profile'));
+    } else {
+      registerUser(formData).then(() => router.push('/'));
+    }
   };
 
   return (
@@ -24,13 +56,13 @@ function RegisterForm({ user, updateUser }) {
         <Form.Label>User Profile</Form.Label>
 
         {/* Bio Input */}
-        <Form.Control as="textarea" name="bio" required placeholder="Enter your Bio" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
+        <Form.Control as="textarea" name="bio" required placeholder="Enter your Bio" onChange={handleInputChange} />
         <Form.Text className="text-muted">Let other users know a little bit about you...</Form.Text>
         {/* Name Input */}
-        <Form.Control as="textarea" name="name" required placeholder="Enter your Name" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
+        <Form.Control as="textarea" name="name" required placeholder="Enter your Name" onChange={handleInputChange} />
         <Form.Text className="text-muted">Let other users know your name...</Form.Text>
         {/* Image Input */}
-        <Form.Control as="textarea" type="url" name="image" required placeholder="Enter Image Url" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
+        <Form.Control as="textarea" type="url" name="image" required placeholder="Enter Image Url" onChange={handleInputChange} />
         <Form.Text className="text-muted">Let other users see you...</Form.Text>
 
         {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
@@ -58,8 +90,12 @@ function RegisterForm({ user, updateUser }) {
 
 RegisterForm.propTypes = {
   user: PropTypes.shape({
-    uid: PropTypes.string.isRequired,
-  }).isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    bio: PropTypes.string,
+    image: PropTypes.string,
+    uid: PropTypes.string,
+  }),
   updateUser: PropTypes.func.isRequired,
 };
 

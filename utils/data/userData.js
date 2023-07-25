@@ -8,9 +8,15 @@ const getUsers = () => new Promise((resolve, reject) => {
 });
 
 const getSingleUser = (id) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/user/${id}`)
+  fetch(`${clientCredentials.databaseURL}/user/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(console.warn('getSingle', id))
     .then((response) => response.json())
-    .then(resolve)
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
@@ -27,21 +33,21 @@ const createUser = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateUser = (user, uid) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/users/${user.id}`, {
+const updateUserProfile = (payload) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/user/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `${uid}`,
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(payload),
   })
+    .then(console.warn('update user', payload.id))
     .then((data) => resolve(data))
     .catch(reject);
 });
 
 const deleteUser = (uid) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/users/${uid}.json`, {
+  fetch(`${clientCredentials.databaseURL}/user/${uid}.json`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -56,6 +62,6 @@ export {
   getUsers,
   getSingleUser,
   createUser,
-  updateUser,
+  updateUserProfile,
   deleteUser,
 };
