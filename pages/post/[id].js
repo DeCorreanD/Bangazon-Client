@@ -13,7 +13,8 @@ const ViewProduct = () => {
   const deleteThisProduct = () => {
     if (window.confirm('Delete Product?')) {
       deleteProduct(id).then(() => {
-        ('Product Deleted');
+        console.warn('Product Deleted'); // Log the message to the console (optional)
+        router.push('/'); // Redirect to the home page
       });
     }
   };
@@ -37,7 +38,8 @@ const ViewProduct = () => {
       </div>
       <div className="d-flex">
         {console.warn(user)}
-        {user.id === productDetails.seller_id ? (
+        {console.warn(productDetails)}
+        {user && productDetails && user.id === productDetails.seller_id?.id ? (
           <>
             <Button
               style={{ margin: '10px', backgroundColor: '#003049' }}

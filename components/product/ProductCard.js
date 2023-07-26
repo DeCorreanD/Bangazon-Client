@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'react-bootstrap';
-import { deleteProduct } from '../../utils/data/productData';
 
 const ProductCard = ({
   id,
@@ -13,18 +12,11 @@ const ProductCard = ({
   price,
   image,
 }) => {
-  const deleteThisProduct = () => {
-    if (window.confirm('Delete Product?')) {
-      deleteProduct(id).then(() => {
-        ('Product Deleted');
-      });
-    }
-  };
   const router = useRouter();
 
   return (
     <>
-      <Card className="text-center">
+      <Card className="d-flex flex-wrap" style={{ width: '15rem', margin: '6px', justifyContent: 'center' }}>
         <Card.Header>{name}</Card.Header>
         <Card.Body>
           <img src={image} alt="postimage" style={{ width: '200px' }} />
@@ -32,22 +24,16 @@ const ProductCard = ({
           <Card.Title>Price: ${price}</Card.Title>
         </Card.Body>
         <Card.Footer className="text-muted">Quantity: {quantity}</Card.Footer>
-        <Button
-          className="product-card-button"
-          onClick={() => {
-            router.push(`/post/${id}`);
-          }}
-        >
-          Product Details
-        </Button>
-        <Button
-          onClick={() => {
-            router.push(`/post/edit/${id}`);
-          }}
-        >
-          Edit Post
-        </Button>
-        <Button onClick={deleteThisProduct}> Delete Product</Button>
+        <>
+          <Button
+            className="product-card-button"
+            onClick={() => {
+              router.push(`/post/${id}`);
+            }}
+          >
+            Product Details
+          </Button>
+        </>
       </Card>
     </>
   );
