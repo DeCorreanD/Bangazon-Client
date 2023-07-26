@@ -1,9 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/require-default-props */
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useRouter } from 'next/router';
+import { FaUserCheck } from 'react-icons/fa';
 import { registerUser } from '../utils/auth';
 import { updateUserProfile } from '../utils/data/userData'; // Update with path to registerUser
 
@@ -71,7 +73,7 @@ function RegisterForm({ user, updateUser }) {
           type="switch"
           id="isseller"
           name="isseller"
-          label="Customer"
+          label="Seller"
           checked={formData.isseller}
           onChange={(e) => {
             setFormData((prevState) => ({
@@ -82,7 +84,7 @@ function RegisterForm({ user, updateUser }) {
         />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        <FaUserCheck />
       </Button>
     </Form>
   );

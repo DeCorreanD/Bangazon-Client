@@ -1,7 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { FaCheckCircle } from 'react-icons/fa';
 import { createProduct, updateProduct } from '../../utils/data/productData';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -100,7 +102,7 @@ const ProductForm = ({ obj }) => {
           <Form.Control name="image" required value={currentProduct.image} onChange={handleChange} type="string" />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          <FaCheckCircle />
         </Button>
       </Form>
     </>

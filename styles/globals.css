@@ -18,5 +18,15 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: lightskyblue;
+}
+.product-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: calc(100% - 12px); /* Set a maximum width for each card to account for margin */
+}
+
+.product-card img {
+  width: 100%; /* To make the image responsive within the card */
 }

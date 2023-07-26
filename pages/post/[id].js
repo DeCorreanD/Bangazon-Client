@@ -1,7 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import { FaTrash, FaCartPlus, FaEdit } from 'react-icons/fa';
 import { getSingleProduct, deleteProduct } from '../../utils/data/productData';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -41,19 +44,21 @@ const ViewProduct = () => {
         {console.warn(productDetails)}
         {user && productDetails && user.id === productDetails.seller_id?.id ? (
           <>
+            {/* Sellers View */}
+
             <Button
               style={{ margin: '10px', backgroundColor: '#003049' }}
               onClick={() => {
                 router.push(`/post/edit/${id}`);
               }}
             >
-              Edit Product
+              <FaEdit />
             </Button>
             <Button style={{ margin: '10px', backgroundColor: '#003049' }} onClick={deleteThisProduct}>
-              Delete Product
+              <FaTrash />
             </Button>
           </>
-        ) : (
+        ) : user && !user.isseller ? ( // Customer View: Show the "Add To Cart" button only for customers (isseller is false)
           <Button
             onClick={() => {
               router.push('/cart');
@@ -65,9 +70,9 @@ const ViewProduct = () => {
               width: '90px',
             }}
           >
-            Add To Cart
+            <FaCartPlus />
           </Button>
-        )}
+        ) : null}
       </div>
     </>
   );
