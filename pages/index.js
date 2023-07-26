@@ -27,6 +27,8 @@ function Home() {
           margin: '0 auto',
         }}
       >
+        {console.warn(products)}
+        {console.warn(user)}
         <h1>Time To Buy Products {user.fbUser.displayName}! </h1>
         <p>Below are the available items, have fun!</p>
 
