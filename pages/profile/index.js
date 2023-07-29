@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
@@ -27,70 +26,63 @@ const Profile = () => {
   const isSeller = () => user && user.isseller;
 
   return (
-    <>
-      <div className="" style={{ justifyContent: 'center' }}>
-        <p>
-          <img src={user.image} alt={user.name} style={{ width: '300px', borderRadius: '50px' }} />
-        </p>
-        <h1>Name: {user.name}</h1>
-        <h2>Bio: {user.bio}</h2>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <img src={user.image} alt={user.name} style={{ width: '300px', borderRadius: '50px' }} />
+      <h1>Name: {user.name}</h1>
+      <h2>Bio: {user.bio}</h2>
 
-        {isSeller() ? ( // Render buttons based on the isSeller() function
-          <>
-            <Button
-              size="sm"
-              variant="warning"
-              onClick={() => {
-                router.push('/post/new');
-              }}
-            >
-              <FaPlus />
-            </Button>
-            <Button
-              size="sm"
-              variant="success"
-              onClick={() => {
-                router.push(`/profile/edit/${user.id}`);
-              }}
-            >
-              <FaEdit />
-            </Button>
-          </>
-        ) : (
-          <div>
-            <Button
-              size="sm"
-              variant="success"
-              onClick={() => {
-                router.push(`/profile/edit/${user.id}`);
-              }}
-            >
-              <FaEdit />
-            </Button>
-          </div>
-        )}
-
-        <Button size="sm" variant="danger" onClick={signOut}>
-          <FaSignOutAlt />
+      {isSeller() ? (
+        <>
+          <Button
+            size="sm"
+            variant="warning"
+            onClick={() => {
+              router.push('/post/new');
+            }}
+          >
+            <FaPlus />
+          </Button>
+          <Button
+            size="sm"
+            variant="success"
+            onClick={() => {
+              router.push(`/profile/edit/${user.id}`);
+            }}
+          >
+            <FaEdit />
+          </Button>
+        </>
+      ) : (
+        <Button
+          size="sm"
+          variant="success"
+          onClick={() => {
+            router.push(`/profile/edit/${user.id}`);
+          }}
+        >
+          <FaEdit />
         </Button>
+      )}
 
-        {isSeller() && (
-          <>
-            <h1>
-              <u>Inventory</u>
-            </h1>
-            <div className="mt-5 d-flex flex-wrap">
-              {/* Render sellerProducts */}
-              {sellerProducts.map((product) => (
-                <section key={`product--${product.id}`} className="product">
-                  <ProductCard id={product.id} sellerId={product.seller_id} name={product.name} description={product.description} quantity={product.quantity} price={product.price} image={product.image} onUpdate={showProducts} />
-                </section>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    </>
+      <Button size="sm" variant="danger" onClick={signOut}>
+        <FaSignOutAlt />
+      </Button>
+
+      {isSeller() && (
+        <>
+          <h1>
+            <u>Inventory</u>
+          </h1>
+          <div className="mt-5 d-flex flex-wrap">
+            {sellerProducts.map((product) => (
+              <section key={`product--${product.id}`} className="product">
+                <ProductCard id={product.id} sellerId={product.seller_id} name={product.name} description={product.description} quantity={product.quantity} price={product.price} image={product.image} onUpdate={showProducts} />
+              </section>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

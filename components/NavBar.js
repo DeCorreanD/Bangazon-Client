@@ -17,9 +17,14 @@ export default function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {isSeller ? (
-              <Link passHref href="/profile">
-                <Nav.Link>Profile</Nav.Link>
-              </Link>
+              <>
+                <Link passHref href="/profile">
+                  <Nav.Link>Profile</Nav.Link>
+                </Link>
+                <Link passHref href="/order/orders">
+                  <Nav.Link>Orders Page</Nav.Link>
+                </Link>
+              </>
             ) : (
               <>
                 <Link passHref href="/">
@@ -27,6 +32,9 @@ export default function NavBar() {
                 </Link>
                 <Link passHref href="/profile">
                   <Nav.Link>Profile</Nav.Link>
+                </Link>
+                <Link passHref href="/order/orders">
+                  <Nav.Link>Orders Page</Nav.Link>
                 </Link>
               </>
             )}
