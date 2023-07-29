@@ -33,7 +33,7 @@ const ViewProduct = () => {
       <div className="mt-5 d-flex flex-wrap">
         <div className="d-flex flex-column">
           <h3>Item Name: {productDetails.name}</h3>
-          <img src={productDetails.image} alt="productimage" style={{ width: '200px' }} />
+          <img src={productDetails.image} alt="productimage" style={{ width: '200px', borderRadius: '50px' }} />
           <h5>Description: {productDetails.description}</h5>
           <p>Qty: {productDetails.quantity}</p>
           <p>Price: ${productDetails.price}</p>
